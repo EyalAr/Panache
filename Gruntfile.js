@@ -36,6 +36,7 @@ module.exports = function(grunt) {
                 files: {
                     "<%= paths.styles %>/global.css": "<%= paths.styles %>/global.less",
                     "<%= paths.styles %>/main.css": "<%= paths.styles %>/main.less",
+                    "<%= paths.styles %>/mainImageView.css": "<%= paths.styles %>/mainImageView.less",
                     "<%= paths.styles %>/_vars.css": "<%= paths.styles %>/vars.less", // not needed for html
                 },
                 options: {

@@ -8,3 +8,4 @@ app.nw
 node-webkit*
 nw
 fonts
+*.css
