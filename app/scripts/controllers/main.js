@@ -16,7 +16,7 @@ angular.module('Panache')
 
         setTimeout(function() {
             $scope.$apply(function() {
-                $scope.current.image = $scope.current.images[0];
+                $scope.current.image = $scope.current.images[1];
             });
         }, 600);
 

@@ -3,7 +3,7 @@
 angular.module('Panache')
     .directive('pnImage', function() {
 
-        var canvas;
+        var svg, g, image;
 
         return {
             restrict: 'A',
@@ -11,10 +11,11 @@ angular.module('Panache')
                 data: '=pnImageData',
                 type: '=pnImageType',
             },
+            templateUrl: 'views/image.html',
             link: function(scope, element, attrs) {
-                canvas = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                // canvas.setAttributeNS('http://www.w3.org/2000/svg', 'viewBox', '0 0 100 100');
-                element.append(canvas);
+                svg = element.find('svg');
+                g = svg.find('g');
+                image = g.find('image');
             },
             controller: function($scope) {
                 $scope.$watch('data', imageDataWatchHandler);
@@ -22,22 +23,26 @@ angular.module('Panache')
                 function imageDataWatchHandler(data) {
                     if (data) {
                         var _img = new Image();
-                        _img.src = 'data:image/' + $scope.type + ';base64,' + data;
-                        _img.onload = function() {
-                            var width = _img.width;
-                            var height = _img.height;
-                            var image = null;
-                            var g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-                            // g.setAttribute('http://www.w3.org/2000/svg', 'transform', 'translate(10,10)');
-                            image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-                            image.setAttribute('xlink:href', 'data:image/' + $scope.type + ';base64,' + data);
-                            image.setAttribute('x', 0);
-                            image.setAttribute('y', 0);
-                            image.setAttribute('width', width + 'px');
-                            image.setAttribute('height', height + 'px');
-                            // g.appendChild(image);
-                            canvas.appendChild(image);
-                        };
+                        _img.src = 'data:image/jpeg;base64,' + data;
+                        var width = _img.width;
+                        var height = _img.height;
+                        _img = null;
+                        var widthRatio = 1000 / width,
+                            heightRatio = 1000 / height,
+                            ratio = Math.min(widthRatio, heightRatio);
+                        var xoffset = (1000 - width * ratio) / 2,
+                            yoffset = (1000 - height * ratio) / 2;
+                        g.attr({
+                            'transform': 'translate(' + xoffset + ' ' + yoffset + ')'
+                        });
+                        image.attr({
+                            'x': 0,
+                            'y': 0,
+                            'width': width * ratio,
+                            'height': height * ratio,
+                            'xlink:href': 'data:image/jpeg;base64,' + data
+                        });
+                        svg.html(svg.html());
                     }
                 }
             }
