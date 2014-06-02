@@ -1,0 +1,62 @@
+@import (reference) '../vendor/bootstrap/less/bootstrap';
+@import (reference) './vars';
+
+.main-view{
+    width: 100%;
+    height: 100%;
+    display: table;
+    table-layout: fixed;
+    text-align: center;
+    .top-row{
+        display: table-row;
+        .top-bar{
+            display: table-cell;
+            width: 100%;
+            height: @top-bar-height;
+            vertical-align: middle;
+        }
+    }
+    .middle-row{
+        display: table-row;
+        .pn-cell{
+            display: table-cell;
+            width: 100%;
+            height: 100% - @top-bar-height - @bottom-bar-height;
+            .pn-table{
+                display: table;
+                table-layout: fixed;
+                width: 100%;
+                height: 100%;
+                .pn-row{
+                    display: table-row;;
+                    .left-bar{
+                        display: table-cell;
+                        width: @left-bar-width;
+                        height: 100% - @top-bar-height - @bottom-bar-height;
+                        vertical-align: middle;
+                    }
+                    .right-bar{
+                        display: table-cell;
+                        width: @right-bar-width;
+                        height: 100% - @top-bar-height - @bottom-bar-height;
+                        vertical-align: middle;
+                    }
+                    .main-image-view{
+                        display: table-cell;
+                        width: 100% - @left-bar-width - @right-bar-width;
+                        height: 100% - @top-bar-height - @bottom-bar-height;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+    .bottom-row{
+        display: table-row;
+        .bottom-bar{
+            display: table-cell;
+            width: 100%;
+            height: @bottom-bar-height;
+        }
+    }
+}

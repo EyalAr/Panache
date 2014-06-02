@@ -1,0 +1,29 @@
+@import (reference) '../vendor/bootstrap/less/bootstrap';
+@import (reference) './vars';
+
+// Angular UI Bootstrap cursor fix:
+.nav, .pagination, .carousel, .panel-title a{ cursor: pointer; }
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
+.pn-view{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: @main-bg;
+}
+
+.pn-table{
+    display: table;
+    .pn-row{
+        display: table-row;
+        .pn-cell{
+            display: table-cell;
+        }
+    }
+}

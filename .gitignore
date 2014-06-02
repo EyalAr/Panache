@@ -5,4 +5,6 @@ bower_components
 vendor
 dist
 app.nw
+node-webkit*
 nw
+fonts
