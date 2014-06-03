@@ -7,26 +7,29 @@ angular.module('Panache')
             restrict: 'A',
             templateUrl: 'views/mainImageView.html',
             scope: {
-                current: '=pnCurrent'
+                current: '=pnCurrent',
+                zoom: '=pnZoom'
             },
             controller: function($scope) {
                 $scope.$watch('current.image', currentImageWatchHandler);
-                $scope.imageData = null;
+                $scope.image = null;
 
                 function currentImageWatchHandler(imPath) {
                     if (imPath) {
                         var fs = require('fs'),
                             path = require('path');
-                        $scope.imageType = path.extname(imPath).slice(1);
                         fs.readFile(imPath, {
                             encoding: 'base64'
                         }, function(err, data) {
                             $scope.$apply(function() {
                                 if (err) {
                                     // TODO: handle error
-                                    return $scope.imageData = null;
+                                    return $scope.image = null;
                                 }
-                                $scope.imageData = data;
+                                $scope.image = {
+                                    data: data,
+                                    type: path.extname(imPath).slice(1)
+                                };
                             });
                         });
                     }

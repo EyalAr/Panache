@@ -12,6 +12,11 @@ angular.module('Panache')
             image: null
         };
 
+        $scope.zoom = {
+            type: 'fixed',
+            value: 'real'
+        };
+
         $scope.$watch('current.dir', currentDirWatchHandler);
 
         setTimeout(function() {
