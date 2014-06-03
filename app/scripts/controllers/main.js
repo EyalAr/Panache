@@ -14,16 +14,10 @@ angular.module('Panache')
 
         $scope.zoom = {
             type: 'fixed',
-            value: 'real'
+            value: 'fit'
         };
 
         $scope.$watch('current.dir', currentDirWatchHandler);
-
-        setTimeout(function() {
-            $scope.$apply(function() {
-                $scope.current.image = $scope.current.images[1];
-            });
-        }, 600);
 
         function currentDirWatchHandler(dirPath) {
             if (dirPath) {

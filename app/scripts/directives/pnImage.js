@@ -3,7 +3,7 @@
 angular.module('Panache')
     .directive('pnImage', function() {
 
-        var svg, g, image;
+        var svg, g, image, width, height;
 
         return {
             restrict: 'A',
@@ -18,11 +18,15 @@ angular.module('Panache')
                 image = g.find('image');
             },
             controller: function($scope) {
-                $scope.$watch('image', imageDataWatchHandler, true);
+                $scope.$watchCollection('image', imageDataWatchHandler);
 
                 function imageDataWatchHandler(imData) {
                     if (imData) {
+                        console.log(imData.data);
                         // set image data
+                        image.attr({
+                            'xlink:href': null
+                        });
                         image.attr({
                             'xlink:href': 'data:image/' + imData.type + ';base64,' + imData.data,
                             'preserveAspectRatio': 'none'
@@ -30,20 +34,21 @@ angular.module('Panache')
                         // get image dimensions:
                         var _img = new Image();
                         _img.src = 'data:image/' + imData.type + ';base64,' + imData.data;
-                        var width = +_img.width,
-                            height = +_img.height;
+                        width = +_img.width;
+                        height = +_img.height;
                         _img = null; // dispose
-                        fixDisplay($scope.zoom, width, height);
+                        fixDisplay();
                     }
                 }
 
-                function fixDisplay(zoom, imWidth, imHeight) {
+                function fixDisplay() {
+                    var zoom = $scope.zoom;
                     if (zoom && zoom.type === 'fixed' && zoom.value === 'fit') {
                         _fitRatio();
                     } else if (zoom && zoom.type === 'fixed' && zoom.value === 'real') {
                         _real();
                     } else { // default
-                        _real();
+                        _fit();
                     }
 
                     // update view
@@ -51,19 +56,35 @@ angular.module('Panache')
 
                     // fit image to view and keep aspect ratio
                     function _fitRatio() {
-                        var widthRatio = 100000 / imWidth,
-                            heightRatio = 100000 / imHeight,
-                            ratio = Math.min(widthRatio, heightRatio);
-                        var xoffset = (100000 - imWidth * ratio) / 2,
-                            yoffset = (100000 - imHeight * ratio) / 2;
+                        var svgWidth = +svg.width(),
+                            svgHeight = +svg.height();
+                        if (svgWidth > svgHeight) {
+                            if (width > height) {
+                                var _width = 100000,
+                                    _height = 100000 * (height / width) * (svgWidth / svgHeight);
+                            } else {
+                                var _height = 100000,
+                                    _width = 100000 * (width / height) * (svgHeight / svgWidth);
+                            }
+                        } else {
+                            if (width > height) {
+                                var _width = 100000,
+                                    _height = 100000 * (height / width) * (svgWidth / svgHeight);
+                            } else {
+                                var _width = 100000,
+                                    _height = 100000 * (height / width) * (svgWidth / svgHeight);
+                            }
+                        }
+                        var xoffset = (100000 - _width) / 2,
+                            yoffset = (100000 - _height) / 2;
                         g.attr({
                             'transform': 'translate(' + xoffset + ' ' + yoffset + ')'
                         });
                         image.attr({
                             'x': 0,
                             'y': 0,
-                            'width': imWidth * ratio,
-                            'height': imHeight * ratio
+                            'width': _width,
+                            'height': _height
                         });
                     }
 
@@ -73,18 +94,16 @@ angular.module('Panache')
                             svgHeight = +svg.height();
                         var widthRatio = 100000 / svgWidth,
                             heightRatio = 100000 / svgHeight;
-                        console.log(svgWidth, svgHeight, imWidth, imHeight, widthRatio, heightRatio);
-                        console.log(imWidth * widthRatio, imHeight * heightRatio);
-                        var xoffset = (100000 - imWidth * widthRatio) / 2,
-                            yoffset = (100000 - imHeight * heightRatio) / 2;
+                        var xoffset = (100000 - width * widthRatio) / 2,
+                            yoffset = (100000 - height * heightRatio) / 2;
                         g.attr({
                             'transform': 'translate(' + xoffset + ' ' + yoffset + ')'
                         });
                         image.attr({
                             'x': 0,
                             'y': 0,
-                            'width': imWidth * widthRatio,
-                            'height': imHeight * heightRatio
+                            'width': width * widthRatio,
+                            'height': height * heightRatio
                         });
                     }
 
