@@ -31,6 +31,9 @@ angular.module('Panache')
                     $scope.current.images = list.filter(function(i) {
                         return exts.indexOf(path.extname(i).toLowerCase()) !== -1;
                     });
+                    if ($scope.current.images.length > 0) {
+                        $scope.current.image = $scope.current.images[0];
+                    }
                 });
             }
         }

@@ -4,9 +4,31 @@
 .pn-thumbnails-container{
     width: 100%;
     height: 100%;
-    .pn-thumbnail{
-        display: inline-block;
-        width: 75px;
-        height: 75px;
+    .pn-table{
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        .pn-row{
+            display: table-row;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            .pn-cell{
+                display: table-cell;
+                text-align: center;
+                vertical-align: middle;
+                width: 75px;
+                height: 100%;
+                padding: 0 5px;
+                .pn-thumbnail{
+                    width: 75px;
+                    height: 75px;
+                    &.active{
+                        box-shadow: 0 0 15px #0055ff;
+                    }
+                }
+            }
+        }
     }
 }
