@@ -14,7 +14,7 @@ angular.module('Panache')
 
         $scope.zoom = {
             type: 'fixed',
-            value: 'real'
+            value: 'fit'
         };
 
         $scope.$watch('current.dir', currentDirWatchHandler);
