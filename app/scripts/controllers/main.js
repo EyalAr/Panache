@@ -19,6 +19,46 @@ angular.module('Panache')
 
         $scope.$watch('current.dir', currentDirWatchHandler);
 
+        $(document).keydown(function(e) {
+            if (e.keyCode === 39) {
+                // right
+                var i = $scope.current.images.indexOf($scope.current.image);
+                if (i + 1 < $scope.current.images.length) {
+                    $scope.$apply(function() {
+                        $scope.current.image = $scope.current.images[i + 1];
+                    });
+                }
+            } else if (e.keyCode == 37) {
+                // left
+                var i = $scope.current.images.indexOf($scope.current.image);
+                if (i - 1 >= 0) {
+                    $scope.$apply(function() {
+                        $scope.current.image = $scope.current.images[i - 1];
+                    });
+                }
+            }
+        });
+
+        $(document).on('wheel',function(e) {
+            if (e.originalEvent.deltaX < -500 || (e.originalEvent.deltaX < -5 && e.originalEvent.deltaX > -10)) {
+                // right
+                var i = $scope.current.images.indexOf($scope.current.image);
+                if (i + 1 < $scope.current.images.length) {
+                    $scope.$apply(function() {
+                        $scope.current.image = $scope.current.images[i + 1];
+                    });
+                }
+            } else if (e.originalEvent.deltaX > 500 || (e.originalEvent.deltaX > 5 && e.originalEvent.deltaX < 10)) {
+                // left
+                var i = $scope.current.images.indexOf($scope.current.image);
+                if (i - 1 >= 0) {
+                    $scope.$apply(function() {
+                        $scope.current.image = $scope.current.images[i - 1];
+                    });
+                }
+            }
+        });
+
         function currentDirWatchHandler(dirPath) {
             if (dirPath) {
                 var fs = require('fs'),
