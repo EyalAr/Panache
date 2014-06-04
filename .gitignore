@@ -9,3 +9,4 @@ node-webkit*
 nw
 fonts
 *.css
+tmp

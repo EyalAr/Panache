@@ -1,1 +1,5 @@
-<ul><li ng-repeat="im in current.images" ng-click="select($index)" class="clickable">{{im}}</li></ul>
+<div class="pn-thumbnails-container">
+    <div class="pn-thumbnail" ng-repeat="im in images" ng-click="select(im.path)" class="clickable">
+        <div pn-image pn-image-params="im"></div>
+    </div>
+</div>
