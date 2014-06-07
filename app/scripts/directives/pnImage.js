@@ -33,10 +33,16 @@ angular.module('Panache')
                     var zoom = $scope.zoom,
                         img = $scope.container.find('img'),
                         cWidth = $scope.container.width(),
-                        cHeight = $scope.container.height();
+                        cHeight = $scope.container.height(),
+                        iWidth = $scope.width,
+                        iHeight = $scope.height,
+                        wRatio = iWidth / cWidth,
+                        hRatio = iHeight / cHeight;
 
                     if (zoom && zoom.type === 'fixed' && zoom.value === 'fit') {
                         _fitRatio();
+                    } else if (zoom && zoom.type === 'fixed' && zoom.value === 'fitDown') {
+                        _fitRatioDown();
                     } else if (zoom && zoom.type === 'fixed' && zoom.value === 'real') {
                         _real();
                     } else { // default
@@ -46,8 +52,16 @@ angular.module('Panache')
                     // fit image to view and keep aspect ratio
                     function _fitRatio() {
                         img.css({
-                            width: cWidth <= cHeight ? '100%' : null,
-                            height: cWidth > cHeight ? '100%' : null
+                            width: (wRatio >= 1 && wRatio >= hRatio) || (wRatio < 1 && hRatio < 1 && wRatio >= hRatio) ? '100%' : null,
+                            height: (wRatio >= 1 && wRatio >= hRatio) || (wRatio < 1 && hRatio < 1 && wRatio >= hRatio) ? null : '100%'
+                        });
+                    }
+
+                    // fit image to view, but only if scaling down, and keep aspect ratio
+                    function _fitRatioDown() {
+                        img.css({
+                            width: wRatio > 1 && wRatio >= hRatio ? '100%' : null,
+                            height: hRatio > 1 && hRatio > wRatio ? '100%' : null
                         });
                     }
 
