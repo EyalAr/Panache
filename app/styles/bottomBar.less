@@ -24,6 +24,11 @@
                 .pn-thumbnail{
                     width: 75px;
                     height: 75px;
+                    background-image: linear-gradient(45deg, @main-image-view-bg-tiles 25%, transparent 25%, transparent 75%, @main-image-view-bg-tiles 75%, @main-image-view-bg-tiles), 
+                    linear-gradient(45deg, @main-image-view-bg-tiles 25%, transparent 25%, transparent 75%, @main-image-view-bg-tiles 75%, @main-image-view-bg-tiles);
+                    background-size:30px 30px;
+                    background-position:0 0, 15px 15px;
+                    box-shadow: 0 0 15px #7d7d7d;
                     &.active{
                         box-shadow: 0 0 15px #0055ff;
                     }
