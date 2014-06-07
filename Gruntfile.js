@@ -38,6 +38,8 @@ module.exports = function(grunt) {
                     "<%= paths.styles %>/main.css": "<%= paths.styles %>/main.less",
                     "<%= paths.styles %>/mainImageView.css": "<%= paths.styles %>/mainImageView.less",
                     "<%= paths.styles %>/bottomBar.css": "<%= paths.styles %>/bottomBar.less",
+                    "<%= paths.styles %>/topBar.css": "<%= paths.styles %>/topBar.less",
+                    "<%= paths.styles %>/loading.css": "<%= paths.styles %>/loading.less",
                     "<%= paths.styles %>/_vars.css": "<%= paths.styles %>/vars.less", // not needed for html
                 },
                 options: {

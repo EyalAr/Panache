@@ -19,7 +19,8 @@ angular.module('Panache')
             restrict: 'A',
             templateUrl: 'views/bottomBar.html',
             scope: {
-                current: '=pnCurrent'
+                current: '=pnCurrent',
+                loading: '=pnLoading'
             },
             controller: function($scope) {
                 $scope.images = [];
@@ -32,7 +33,8 @@ angular.module('Panache')
                     if (paths) {
                         var fs = require('fs'),
                             path = require('path');
-                        async.map(paths, function(imPath, done) {
+                        $scope.loading.total += paths.length;
+                        async.mapLimit(paths, 1, function(imPath, done) {
                             var image = {
                                 path: imPath
                             };
@@ -40,12 +42,18 @@ angular.module('Panache')
                                 encoding: 'base64'
                             }, function(err, data) {
                                 if (err) {
+                                    $scope.$apply(function() {
+                                        $scope.loading.finished++;
+                                    });
                                     return done(err);
                                 }
                                 var dataUrl = resizeImageBase64('data:image/' + path.extname(imPath).slice(1) + ';base64,' + data, 75),
                                     dataUrlParts = dataUrl.match(/^data:image\/(.*);base64,(.*)$/);
                                 image.data = dataUrlParts[2];
                                 image.type = dataUrlParts[1];
+                                $scope.$apply(function() {
+                                    $scope.loading.finished++;
+                                });
                                 done(null, image);
                             });
                         }, function(err, images) {

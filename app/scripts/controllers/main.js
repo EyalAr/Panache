@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Panache')
-    .controller('mainCtrl', function($scope) {
+    .controller('mainCtrl', function($scope, $timeout) {
 
         var exts = ['.jpg', '.jpeg', '.png', '.gif'];
 
@@ -12,11 +12,17 @@ angular.module('Panache')
             image: null
         };
 
+        $scope.loading = {
+            total: 0,
+            finished: 0
+        };
+
         $scope.zoom = {
             type: 'fixed',
             value: 'fitDown'
         };
 
+        $scope.$watch('loading', loadingWatchHandler, true);
         $scope.$watch('current.dir', currentDirWatchHandler);
 
         $(document).keydown(function(e) {
@@ -49,7 +55,7 @@ angular.module('Panache')
             }, ms);
         }
 
-        $(document).on('wheel', function(e) {
+        $(".main-image-view-container").on('wheel', function(e) {
             if (!wheelLocked) {
                 lockWheelFor(150);
                 if (e.originalEvent.deltaX < -50) {
@@ -72,11 +78,21 @@ angular.module('Panache')
             }
         });
 
+        function loadingWatchHandler(loading) {
+            $timeout(function() {
+                if (loading.total === loading.finished) {
+                    loading.total = loading.finished = 0;
+                }
+            }, 50);
+        }
+
         function currentDirWatchHandler(dirPath) {
             if (dirPath) {
                 var fs = require('fs'),
                     path = require('path');
+                $scope.loading.total++;
                 fs.readdir(dirPath, function(err, list) {
+                    $scope.loading.finished++;
                     if (err) {
                         // TODO: handle error
                         return $scope.current.images = [];
