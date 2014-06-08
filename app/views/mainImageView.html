@@ -1,3 +1,33 @@
 <div class="main-image-view">
     <div pn-image pn-image-params="image" pn-zoom="zoom"></div>
+    <div class="pn-edge-bar pn-top-edge-bar" ng-show="showEdgeBars">
+        <i class="fa fa-trash-o"></i>
+        <i class="fa fa-copy"></i>
+        <i class="fa fa-cut"></i>
+    </div>
+    <div class="pn-edge-bar pn-bottom-edge-bar" ng-show="showEdgeBars">
+        <i class="fa fa-arrow-left"></i>
+        <i class="fa fa-arrows"></i>
+        <i class="fa fa-arrow-right"></i>
+    </div>
+    <div class="pn-edge-bar pn-left-edge-bar" ng-show="showEdgeBars">
+        <div class="pn-table">
+            <div class="pn-row">
+                <div class="pn-cell">
+                    <i class="fa fa-rotate-left"></i>
+                    <i class="fa fa-rotate-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pn-edge-bar pn-right-edge-bar" ng-show="showEdgeBars">
+        <div class="pn-table">
+            <div class="pn-row">
+                <div class="pn-cell">
+                    <i class="fa fa-expand"></i>
+                    <i class="fa fa-compress"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

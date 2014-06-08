@@ -18,7 +18,6 @@ angular.module('Panache')
                         } else {
                             $scope.precentage = 0 | data.finished / data.total * 100;
                         }
-                        console.log(data, $scope.precentage);
                     }
                 }, true);
             }

@@ -5,7 +5,7 @@ angular.module('Panache', ['ngRoute', 'ui.bootstrap'])
         var gui = require('nw.gui'),
             win = gui.Window.get();
         win.show();
-        // win.showDevTools();
+        win.showDevTools();
     })
     .config(function($routeProvider) {
 

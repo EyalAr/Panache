@@ -10,6 +10,19 @@ angular.module('Panache')
                 current: '=pnCurrent',
                 zoom: '=pnZoom'
             },
+            link: function(scope, element, attrs) {
+                scope.showEdgeBars = false;
+                element.mouseenter(function() {
+                    scope.$apply(function() {
+                        scope.showEdgeBars = true;
+                    });
+                });
+                element.mouseleave(function() {
+                    scope.$apply(function() {
+                        scope.showEdgeBars = false;
+                    });
+                });
+            },
             controller: function($scope) {
                 $scope.$watch('current.image', currentImageWatchHandler);
                 $scope.image = null;

@@ -1,0 +1,66 @@
+@import (reference) '../vendor/bootstrap/less/bootstrap';
+@import (reference) './vars';
+
+.pn-edge-bar{
+    position: absolute;
+    .fa{
+        color: @gray-darker;
+        font-size: 3em;
+        cursor: pointer;
+        text-shadow: 0 0 7px @gray-lighter;
+        -webkit-text-stroke: 1px darken(@gray-lighter, 20%);
+    }
+}
+
+.pn-top-edge-bar{
+    top: 0;
+}
+
+.pn-bottom-edge-bar{
+    bottom: 0;
+}
+
+.pn-left-edge-bar{
+    left: 0;
+}
+
+.pn-right-edge-bar{
+    right: 0;
+}
+
+.pn-top-edge-bar, .pn-bottom-edge-bar{
+    right: 0;
+    left: 0;
+    .fa{
+        line-height: 60px;
+        padding: 0 10px;
+    }
+}
+
+.pn-left-edge-bar, .pn-right-edge-bar{
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    .pn-table{
+        width: 100%;
+        height: 100%;
+        display: table;
+        .pn-row{
+            width: 100%;
+            height: 100%;
+            display: table-row;
+            .pn-cell{
+                width: 100%;
+                height: 100%;
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+                .fa{
+                    display: block;
+                    padding: 10px 0;
+                }
+            }
+        }
+    }
+}
