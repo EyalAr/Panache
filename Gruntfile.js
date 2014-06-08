@@ -11,12 +11,20 @@ module.exports = function(grunt) {
             images: '<%= paths.root %>/images',
             fonts: '<%= paths.root %>/fonts',
             bsFonts: '<%= paths.root %>/vendor/bootstrap/dist/fonts',
+            faFonts: '<%= paths.root %>/vendor/font-awesome/fonts',
         },
 
         copy: {
             bsFonts: {
                 expand: true,
                 cwd: '<%= paths.bsFonts %>/',
+                src: '*',
+                dest: '<%= paths.fonts %>/',
+                filter: 'isFile'
+            },
+            faFonts: {
+                expand: true,
+                cwd: '<%= paths.faFonts %>/',
                 src: '*',
                 dest: '<%= paths.fonts %>/',
                 filter: 'isFile'
