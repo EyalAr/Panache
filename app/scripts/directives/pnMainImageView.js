@@ -26,15 +26,18 @@ angular.module('Panache')
             controller: function($scope) {
                 $scope.$watch('current.image', currentImageWatchHandler);
                 $scope.image = null;
+                $scope.loading = false;
 
                 function currentImageWatchHandler(imPath) {
                     if (imPath) {
                         var fs = require('fs'),
                             path = require('path');
-                        fs.readFile(imPath, {
+                        $scope.loading = true;
+                        fs.readFile(path.join($scope.current.dir, imPath), {
                             encoding: 'base64'
                         }, function(err, data) {
                             $scope.$apply(function() {
+                                $scope.loading = false;
                                 if (err) {
                                     // TODO: handle error
                                     return $scope.image = null;

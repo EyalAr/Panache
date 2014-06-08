@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('Panache', ['ngRoute', 'ui.bootstrap'])
+angular.module('Panache', ['ngRoute', 'ngAnimate', 'ui.bootstrap'])
     .run(function() {
         var gui = require('nw.gui'),
             win = gui.Window.get();

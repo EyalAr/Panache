@@ -38,7 +38,7 @@ angular.module('Panache')
                             var image = {
                                 path: imPath
                             };
-                            fs.readFile(imPath, {
+                            fs.readFile(path.join($scope.current.dir, imPath), {
                                 encoding: 'base64'
                             }, function(err, data) {
                                 if (err) {
@@ -60,6 +60,7 @@ angular.module('Panache')
                             $scope.$apply(function() {
                                 if (err) {
                                     // TODO: handle error
+                                    console.error(err);
                                     return $scope.images = null;
                                 }
                                 angular.copy(images, $scope.images);

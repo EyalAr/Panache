@@ -6,7 +6,7 @@ angular.module('Panache')
         var exts = ['.jpg', '.jpeg', '.png', '.gif'];
 
         $scope.current = {
-            dir: process.cwd(),
+            dir: require('path').join(process.cwd(),'tmp'),
             images: [],
             selected: [],
             image: null
@@ -90,11 +90,10 @@ angular.module('Panache')
             if (dirPath) {
                 var fs = require('fs'),
                     path = require('path');
-                $scope.loading.total++;
                 fs.readdir(dirPath, function(err, list) {
-                    $scope.loading.finished++;
                     if (err) {
                         // TODO: handle error
+                        console.error(err);
                         return $scope.current.images = [];
                     }
                     $scope.current.images = list.filter(function(i) {

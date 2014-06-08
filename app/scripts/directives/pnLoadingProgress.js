@@ -10,7 +10,7 @@ angular.module('Panache')
             },
             templateUrl: 'views/loading.html',
             controller: function($scope) {
-                $scope.precentage = 100;
+                $scope.precentage = null;
                 $scope.$watch('data', function(data) {
                     if (data) {
                         if (!data.total) {
