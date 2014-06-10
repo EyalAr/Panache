@@ -1,0 +1,11 @@
+<div class="pn-dir-list-container">
+    <div class="pn-table">
+        <div class="pn-row">
+            <div class="pn-cell" ng-repeat="im in images">
+                <div class="pn-thumbnail clickable" ng-click="select(im.path)" ng-class="{'active': im.path === current.image}">
+                    <div pn-image pn-image-params="im"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
