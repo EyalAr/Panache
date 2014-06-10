@@ -1,0 +1,42 @@
+@import (reference) '../vendor/bootstrap/less/bootstrap';
+@import (reference) './vars';
+
+.pn-dir-list-container{
+    height: 100%;
+    width: 100%;
+    .pn-table{
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        .pn-row{
+            display: table-row;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            .pn-cell{
+                display: table-cell;
+                text-align: left;
+                vertical-align: middle;
+                height: 100%;
+                .pn-dir-tree-container{
+                    height: 100%;
+                    overflow: auto;
+                    .pn-dir{
+                        width: 100%;
+                        margin-left: 15px;
+                        .entry{
+                            color: lighten(@gray,20%);
+                            .name{
+                                font-family: Comfortaa;
+                            }
+                        }
+                        .entry.active{
+                            color: @gray-darker;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

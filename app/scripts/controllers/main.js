@@ -6,7 +6,7 @@ angular.module('Panache')
         var exts = ['.jpg', '.jpeg', '.png', '.gif'];
 
         $scope.current = {
-            dir: require('path').join(process.cwd(),'tmp'),
+            dir: process.cwd(),
             images: [],
             selected: [],
             image: null

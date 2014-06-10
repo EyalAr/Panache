@@ -1,9 +1,28 @@
 <div class="pn-dir-list-container">
     <div class="pn-table">
         <div class="pn-row">
-            <div class="pn-cell" ng-repeat="im in images">
-                <div class="pn-thumbnail clickable" ng-click="select(im.path)" ng-class="{'active': im.path === current.image}">
-                    <div pn-image pn-image-params="im"></div>
+            <div class="pn-cell">
+                <div class="pn-dir-tree-container">
+                    <div ng-repeat="dir in tree" class="pn-dir parent clickable">
+                        <div class="entry" ng-click="select(dir.path)">
+                            <i ng-if="dir.open" class="fa fa-folder-open"></i>
+                            <i ng-if="!dir.open" class="fa fa-folder-o"></i>
+                            <span class="name">{{dir.name}}</span>
+                        </div>
+                        <div ng-repeat="dir in dir.children" class="pn-dir sibling clickable">
+                            <div class="entry" ng-class="{'active': dir.path === current.dir}" ng-click="select(dir.path)">
+                                <i ng-if="dir.open" class="fa fa-folder-open"></i>
+                                <i ng-if="!dir.open" class="fa fa-folder"></i>
+                                <span class="name">{{dir.name}}</span>
+                            </div>
+                            <div ng-repeat="dir in dir.children" class="pn-dir child clickable">
+                                <div class="entry" ng-click="select(dir.path)">
+                                    <i class="fa fa-folder"></i>
+                                    <span class="name">{{dir.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

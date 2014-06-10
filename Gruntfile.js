@@ -47,6 +47,7 @@ module.exports = function(grunt) {
                     "<%= paths.styles %>/mainImageView.css": "<%= paths.styles %>/mainImageView.less",
                     "<%= paths.styles %>/bottomBar.css": "<%= paths.styles %>/bottomBar.less",
                     "<%= paths.styles %>/topBar.css": "<%= paths.styles %>/topBar.less",
+                    "<%= paths.styles %>/leftBar.css": "<%= paths.styles %>/leftBar.less",
                     "<%= paths.styles %>/loading.css": "<%= paths.styles %>/loading.less",
                     "<%= paths.styles %>/edgeBars.css": "<%= paths.styles %>/edgeBars.less",
                     "<%= paths.styles %>/_vars.css": "<%= paths.styles %>/vars.less", // not needed for html

@@ -57,14 +57,14 @@ angular.module('Panache')
                                 done(null, image);
                             });
                         }, function(err, images) {
-                            $scope.$apply(function() {
+                            // $scope.$apply(function() {
                                 if (err) {
                                     // TODO: handle error
                                     console.error(err);
                                     return $scope.images = null;
                                 }
                                 angular.copy(images, $scope.images);
-                            });
+                            // });
                         });
                     }
                 }
