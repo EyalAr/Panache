@@ -90,11 +90,13 @@ angular.module('Panache')
             if (dirPath) {
                 var fs = require('fs'),
                     path = require('path');
+                $scope.current.images = [];
+                $scope.current.selected = [];
+                $scope.current.image = null;
                 fs.readdir(dirPath, function(err, list) {
                     if (err) {
                         // TODO: handle error
-                        console.error(err);
-                        return $scope.current.images = [];
+                        return console.error(err);
                     }
                     $scope.current.images = list.filter(function(i) {
                         return exts.indexOf(path.extname(i).toLowerCase()) !== -1;

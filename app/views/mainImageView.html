@@ -1,6 +1,5 @@
-<div pn-loading-progress class="pn-loading" ng-show="loading"></div>
-<div class="main-image-view" ng-hide="loading">
-    <div pn-image pn-image-params="image" pn-zoom="zoom"></div>
+<div class="main-image-view">
+    <div pn-image pn-image-params="image" pn-zoom="zoom" ng-hide="loading"></div>
     <div class="pn-edge-bar pn-top-edge-bar" ng-show="showEdgeBars">
         <div class="pn-wrapper">
             <i class="fa fa-trash-o"></i>
@@ -40,3 +39,4 @@
         </div>
     </div>
 </div>
+<div pn-loading-progress class="pn-loading" ng-show="loading"></div>

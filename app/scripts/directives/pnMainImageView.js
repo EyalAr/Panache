@@ -29,26 +29,27 @@ angular.module('Panache')
                 $scope.loading = false;
 
                 function currentImageWatchHandler(imPath) {
-                    if (imPath) {
-                        var fs = require('fs'),
-                            path = require('path');
-                        $scope.loading = true;
-                        fs.readFile(path.join($scope.current.dir, imPath), {
-                            encoding: 'base64'
-                        }, function(err, data) {
-                            $scope.$apply(function() {
-                                $scope.loading = false;
-                                if (err) {
-                                    // TODO: handle error
-                                    return $scope.image = null;
-                                }
-                                $scope.image = {
-                                    data: data,
-                                    type: path.extname(imPath).slice(1)
-                                };
-                            });
-                        });
+                    if (!imPath) {
+                        return $scope.image = null;
                     }
+                    var fs = require('fs'),
+                        path = require('path');
+                    $scope.loading = true;
+                    fs.readFile(path.join($scope.current.dir, imPath), {
+                        encoding: 'base64'
+                    }, function(err, data) {
+                        $scope.$apply(function() {
+                            $scope.loading = false;
+                            if (err) {
+                                // TODO: handle error
+                                return $scope.image = null;
+                            }
+                            $scope.image = {
+                                data: data,
+                                type: path.extname(imPath).slice(1)
+                            };
+                        });
+                    });
                 }
             }
         };

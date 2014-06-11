@@ -17,16 +17,17 @@ angular.module('Panache')
                 $scope.$watchCollection('image', imageDataWatchHandler);
 
                 function imageDataWatchHandler(imData) {
-                    if (imData) {
-                        $scope.container.empty();
-                        // set image data
-                        var img = new Image();
-                        img.src = 'data:image/' + imData.type + ';base64,' + imData.data;
-                        $scope.width = +img.width;
-                        $scope.height = +img.height;
-                        $scope.container.append(img);
-                        fixDisplay();
+                    if (!imData) {
+                        return $scope.container.empty();
                     }
+                    $scope.container.empty();
+                    // set image data
+                    var img = new Image();
+                    img.src = 'data:image/' + imData.type + ';base64,' + imData.data;
+                    $scope.width = +img.width;
+                    $scope.height = +img.height;
+                    $scope.container.append(img);
+                    fixDisplay();
                 }
 
                 function fixDisplay() {
